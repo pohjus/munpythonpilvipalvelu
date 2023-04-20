@@ -15,7 +15,7 @@ def add_customer():
     customer_json = json.dumps(customer)
 
     # tallenna saatu data dropboxiin!
-    dbx.files_upload(customer_json.encode("utf-8"), '/highscore.txt',  mode=dropbox.files.WriteMode("overwrite")))
+    dbx.files_upload(customer_json.encode("utf-8"), '/highscore.txt',  mode=dropbox.files.WriteMode("overwrite"))
     return jsonify({'message': 'Customer added successfully!'})
 
 if __name__ == '__main__':
