@@ -11,10 +11,9 @@ get https://mun-super-palvelu-jee-jee.onrender.com/customers
 
 get http://127.0.0.1:8000/customers
 
-
 ###
 
 post http://127.0.0.1:8000/customers
 content-type: application/json
 
-{ "name": "Kalle" }
+{ "name": "Kaldsdsdsle" }
