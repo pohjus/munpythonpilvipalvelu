@@ -2,3 +2,10 @@ post https://mun-super-palvelu-jee-jee.onrender.com/customers
 content-type: application/json
 
 { "name": "Kalle" }
+
+###
+
+post http://127.0.0.1:8000/customers
+content-type: application/json
+
+{ "name": "ddsds" }
