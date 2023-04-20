@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/customers', methods=['GET'])
 def get_customers():
-    metadata, res = dbx.files_download('/highscore.txt')
+    metadata, res = dbx.files_download('/highscore.json')
     data = json.loads(res.content.decode("utf-8"))
     return jsonify(data)
 
@@ -21,7 +21,7 @@ def add_customer():
     customer = request.get_json()
     customer_json = json.dumps(customer)
 
-    dbx.files_upload(customer_json.encode("utf-8"), '/highscore.txt',  mode=dropbox.files.WriteMode("overwrite"))
+    dbx.files_upload(customer_json.encode("utf-8"), '/highscores.json',  mode=dropbox.files.WriteMode("overwrite"))
     return jsonify({'message': 'Customer added successfully!'})
 
 

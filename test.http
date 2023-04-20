@@ -5,7 +5,6 @@ content-type: application/json
 
 ###
 
-post http://127.0.0.1:8000/customers
-content-type: application/json
+get https://mun-super-palvelu-jee-jee.onrender.com/customers
 
-{ "name": "ddsds" }
+
