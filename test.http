@@ -1,0 +1,4 @@
+post https://mun-super-palvelu-jee-jee.onrender.com/customers
+content-type: application/json
+
+{ "name": "Kalle" }
