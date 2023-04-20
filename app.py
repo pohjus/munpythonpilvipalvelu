@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/customers', methods=['GET'])
 def get_customers():
-    metadata, res = dbx.files_download('/highscore.json')
+    metadata, res = dbx.files_download('/highscores.json')
     data = json.loads(res.content.decode("utf-8"))
     return jsonify(data)
 
