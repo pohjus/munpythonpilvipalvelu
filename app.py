@@ -10,14 +10,21 @@ dbx = dropbox.Dropbox(access_token)
 
 app = Flask(__name__)
 
+@app.route('/customers', methods=['GET'])
+def get_customers():
+    metadata, res = dbx.files_download('/highscore.txt')
+    data = json.loads(res.content.decode("utf-8"))
+    return jsonify(data)
+
 @app.route('/customers', methods=['POST'])
 def add_customer():
     customer = request.get_json()
     customer_json = json.dumps(customer)
 
-    # tallenna saatu data dropboxiin!
     dbx.files_upload(customer_json.encode("utf-8"), '/highscore.txt',  mode=dropbox.files.WriteMode("overwrite"))
     return jsonify({'message': 'Customer added successfully!'})
+
+
 
 if __name__ == '__main__':
     app.run()
