@@ -1,15 +1,23 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, json
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
+import tempfile
 
 app = Flask(__name__)
 
-cred = credentials.Certificate(os.getenv("firebase"))
+json_str = os.environ.get('firebase')
+with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+    f.write(json_str)
+    temp_path = f.name
+
+cred = credentials.Certificate(temp_path)
+
 firebase_admin.initialize_app(cred, {
-    'storageBucket': os.getenv("mydatabase-38cf0.appspot.com")
+    'storageBucket': 'mydatabase-38cf0.appspot.com'
 })
+
 
 bucket = storage.bucket()
 
@@ -35,4 +43,4 @@ def add_customer():
     return jsonify({'message': 'Customer added successfully!'})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8000)
