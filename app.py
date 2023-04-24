@@ -6,7 +6,7 @@ from firebase_admin import storage
 
 app = Flask(__name__)
 
-cred = credentials.Certificate(os.getenv("FIREBASE_CREDENTIALS_PATH"))
+cred = credentials.Certificate(os.getenv("firebase"))
 firebase_admin.initialize_app(cred, {
     'storageBucket': os.getenv("mydatabase-38cf0.appspot.com")
 })
