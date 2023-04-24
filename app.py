@@ -20,9 +20,6 @@ REDIRECT_URI = 'http://localhost:5000/auth'
 
 auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, 'token')
 
-# Location in Dropbox to store the access token file
-ACCESS_TOKEN_FILE_PATH = '/access_token.txt'
-
 @app.route('/auth')
 def auth():
     # Get the authorization code from the URL query parameters
@@ -44,18 +41,6 @@ def auth():
 def start_auth():
     auth_url = auth_flow.start()
     return redirect(auth_url)
-
-
-def load_access_token():
-    # Download the access token file from Dropbox
-    try:
-        metadata, res = dbx.files_download(ACCESS_TOKEN_FILE_PATH)
-        access_token = res.content.decode('utf-8').strip()
-        return access_token
-    except dropbox.exceptions.ApiError as e:
-        print('Error downloading access token file:', e)
-        raise e
-
 
 @app.route('/customers', methods=['GET'])
 def get_customers():
