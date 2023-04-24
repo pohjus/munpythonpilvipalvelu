@@ -18,7 +18,7 @@ AUTH_URL = 'https://www.dropbox.com/oauth2/authorize'
 TOKEN_URL = 'https://api.dropbox.com/oauth2/token'
 REDIRECT_URI = 'http://localhost:5000/auth'
 
-auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, 'token')
+auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, 'offline')
 
 @app.route('/auth')
 def auth():
