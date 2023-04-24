@@ -31,11 +31,14 @@ def auth():
     # Use the authorization code to obtain a new access token
     try:
         access_token, user_id = auth_flow.finish(code)
-        # Store the new access token securely
-        # ...
+
+        # Store the new access token securely in an environment variable
+        os.environ['DROPBOX_ACCESS_TOKEN'] = access_token
+
         return redirect(url_for('get_customers'))
     except dropbox.exceptions.AuthError as e:
         return jsonify({'error': str(e)})
+
 
 @app.route('/auth/start')
 def start_auth():
@@ -56,9 +59,8 @@ def load_access_token():
 
 @app.route('/customers', methods=['GET'])
 def get_customers():
-    # Load the access token from the text file in Dropbox
-    
-    access_token = load_access_token()
+    # Load the access token from the environment variable
+    access_token = os.getenv('DROPBOX_ACCESS_TOKEN')
 
     dbx = dropbox.Dropbox(access_token)
 
@@ -70,8 +72,8 @@ def get_customers():
 
 @app.route('/customers', methods=['POST'])
 def add_customer():
-    # Load the access token from the text file in Dropbox
-    access_token = load_access_token()
+    # Load the access token from the environment variable
+    access_token = os.getenv('DROPBOX_ACCESS_TOKEN')
 
     dbx = dropbox.Dropbox(access_token)
 
