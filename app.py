@@ -16,7 +16,7 @@ CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 AUTH_URL = 'https://www.dropbox.com/oauth2/authorize'
 TOKEN_URL = 'https://api.dropbox.com/oauth2/token'
-REDIRECT_URI = 'http://localhost:5000/auth'
+REDIRECT_URI = 'https://mun-super-palvelu-jee-jee.onrender.com/auth'
 
 auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, 'offline')
 
