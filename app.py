@@ -7,17 +7,24 @@ import tempfile
 
 app = Flask(__name__)
 
+# luetaan firebase ympäristömuuttuja
+# tee render.comiin uusi muuttuja nimeltä firebase jonka
+# sisältö on json tiedosto jonka saat firebaselta
 json_str = os.environ.get('firebase')
+
+# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
 with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
     f.write(json_str)
     temp_path = f.name
 
+# luetaan tiedostosta json filu
 cred = credentials.Certificate(temp_path)
 
+# tee render.comiin ympäristömuuttuja bucket, jonka sisältö
+# esim: mydatabase-38cf0.appspot.com
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'mydatabase-38cf0.appspot.com'
+    'storageBucket': os.environ.get('bucket')
 })
-
 
 bucket = storage.bucket()
 
@@ -43,4 +50,4 @@ def add_customer():
     return jsonify({'message': 'Customer added successfully!'})
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run
