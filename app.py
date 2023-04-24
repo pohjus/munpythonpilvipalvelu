@@ -1,10 +1,10 @@
 import os
-
 import dropbox
-from flask import Flask, request, jsonify, json
-import requests
+from flask import Flask, request, jsonify, json, redirect, url_for
+
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY")
 
 access_token = os.getenv("avain")
 
